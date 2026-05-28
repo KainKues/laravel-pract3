@@ -1,0 +1,25 @@
+services:
+    php_apache:
+      container_name: "apache_v12"
+      build: .
+      ports:
+        - "8080:80"
+      volumes:
+        - "./www:/var/www/html"
+      networks:
+        - app_net_p
+
+    pgsqlDevelop:
+      container_name: "pgsql_develop"
+      image: postgres:18.3
+      ports:
+        - "5432:5432"
+      volumes:
+        - "./pgdata:/var/lib/postgresql"
+      environment:
+        POSTGRES_PASSWORD: root
+      networks:
+        - app_net_p
+
+networks:
+  app_net_p: {}
